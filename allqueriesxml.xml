@@ -1,5 +1,5 @@
 <Queries>
-	<Query>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -27,8 +27,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -56,8 +56,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -85,8 +85,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -112,8 +112,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -141,8 +141,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -168,8 +168,8 @@
 				<Pattern>^(500|499|23|22|21|20|19|18|17|16|9|8|7|6|5)$</Pattern>
 			</RegExExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -197,8 +197,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -226,8 +226,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -255,8 +255,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -284,8 +284,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -313,8 +313,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -342,8 +342,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -369,8 +369,8 @@
 				<Pattern>^(2274|2268|2220|2219|2214)$</Pattern>
 			</RegExExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -396,8 +396,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -425,8 +425,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -454,8 +454,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -483,8 +483,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -512,8 +512,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -541,8 +541,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -570,8 +570,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -599,8 +599,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -628,8 +628,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -657,8 +657,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -686,8 +686,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -715,8 +715,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -744,8 +744,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -771,8 +771,8 @@
 				<Pattern>^(2226|2230|2231|2232)$</Pattern>
 			</RegExExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -798,8 +798,8 @@
 				<Pattern>^(5174|5179|5180)$</Pattern>
 			</RegExExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -827,8 +827,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -854,8 +854,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -883,8 +883,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -912,8 +912,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -941,8 +941,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -970,8 +970,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -997,8 +997,8 @@
 				<Pattern>^(5172|5173)$</Pattern>
 			</RegExExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1026,8 +1026,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1055,8 +1055,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1082,8 +1082,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1111,8 +1111,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1140,8 +1140,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1169,8 +1169,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -1198,8 +1198,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">Application</Value>
@@ -1227,8 +1227,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1256,8 +1256,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1285,8 +1285,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1314,8 +1314,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1343,8 +1343,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1372,8 +1372,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1399,8 +1399,8 @@
 				<Pattern>^(1135|1134)$</Pattern>
 			</RegExExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1428,8 +1428,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1457,8 +1457,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1486,8 +1486,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1515,8 +1515,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1542,8 +1542,8 @@
 				<Pattern>^(1071|1073)$</Pattern>
 			</RegExExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1571,8 +1571,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1600,8 +1600,8 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
-	<Query>
+	</Workload>
+	<Workload>
 		<LogName>
 			<ValueExpression>
 				<Value Type="String">System</Value>
@@ -1629,5 +1629,5 @@
 				</ValueExpression>
 			</SimpleExpression>
 		</Expression>
-	</Query>
+	</Workload>
 </Queries>

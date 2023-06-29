@@ -1,0 +1,60 @@
+<Queries>
+	<Workload>
+		<LogName>
+			<ValueExpression>
+				<Value Type="String">Application</Value>
+			</ValueExpression>
+		</LogName>
+		<Expression>
+			<SimpleExpression>
+				<ValueExpression>
+					<XPathQuery Type="String">PublisherName</XPathQuery>
+				</ValueExpression>
+				<Operator>Equal</Operator>
+				<ValueExpression>
+					<Value Type="String">Microsoft-Windows-IIS-W3SVC-WP</Value>
+				</ValueExpression>
+			</SimpleExpression>
+		</Expression>
+		<Expression>
+			<SimpleExpression>
+				<ValueExpression>
+					<XPathQuery>EventDisplayNumber</XPathQuery>
+				</ValueExpression>
+				<Operator>Equal</Operator>
+				<ValueExpression>
+					<Value>2216</Value>
+				</ValueExpression>
+			</SimpleExpression>
+		</Expression>
+	</Workload>
+	<Workload>
+		<LogName>
+			<ValueExpression>
+				<Value Type="String">Application</Value>
+			</ValueExpression>
+		</LogName>
+		<Expression>
+			<SimpleExpression>
+				<ValueExpression>
+					<XPathQuery Type="String">PublisherName</XPathQuery>
+				</ValueExpression>
+				<Operator>Equal</Operator>
+				<ValueExpression>
+					<Value Type="String">Microsoft-Windows-IIS-W3SVC-WP</Value>
+				</ValueExpression>
+			</SimpleExpression>
+		</Expression>
+		<Expression>
+			<SimpleExpression>
+				<ValueExpression>
+					<XPathQuery>EventDisplayNumber</XPathQuery>
+				</ValueExpression>
+				<Operator>Equal</Operator>
+				<ValueExpression>
+					<Value>2221</Value>
+				</ValueExpression>
+			</SimpleExpression>
+		</Expression>
+	</Workload>
+</Queries>
