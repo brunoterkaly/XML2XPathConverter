@@ -1,31 +1,39 @@
+# Import necessary libraries
 import xml.etree.ElementTree as ET
 import re
 import os
 
+
+# Parse XML string and return a dictionary representing the XML structure
 def parse_expression(expression):
     root = ET.fromstring(expression)
     return parse_node(root)
 
+
+# Recursively traverse XML node tree and build a dictionary
 def parse_node(node):
     tree = {
         'tag': node.tag,
         'attrib': node.attrib,
-        'text': node.text if node.text else "",  # add this line
+        'text': node.text if node.text else "",  # Add empty string if node.text is None
         'children': []
     }
     for child in node:
-        tree['children'].append(parse_node(child))
+        tree['children'].append(parse_node(child))  # Recursive call for each child
     return tree
 
 
-
+# Generate value expression from a node in the tree
 def generate_value_expression(node):
     value = ""
     for child in node['children']:
+        # Concatenate Type and text if the tag is either 'XPathQuery' or 'Value'
         if child['tag'] == 'XPathQuery' or child['tag'] == 'Value':
             value += child['attrib'].get('Type', "") + child.get('text', "")
     return value
 
+
+# Generate simple expression using the operator and the values
 def generate_simple_expression(node):
     value_expressions = []
     operator = ""
@@ -42,69 +50,25 @@ def generate_simple_expression(node):
     result.extend(value_expressions)
     return result
 
+
+# Traverse the XML tree and process each 'Workload' tag
 def process_trees(root, file):
     for workload in root['children']:
         if workload['tag'] == 'Workload':
             process_tree(workload, file)
 
-'''
---------------------------
-def process_tree(tree):
---------------------------
-In essence, this function performs a depth-first traversal of the XML tree,
-collecting expressions and the log name along the way, and then constructs and
-prints an XPath expression.
 
-- The function process_tree is defined with tree as a parameter. tree is
-expected to be a dictionary representation of the parsed XML tree.
-
-- A list named stack is initialized with the tree as its first element. This
-list will be used as a stack data structure, which follows the
-Last-In-First-Out (LIFO) principle.
-
-- An empty list expressions and a None variable log_name are initialized.
-expressions will store all the simple expressions obtained from the XML tree,
-and log_name will store the log name value from the XML tree.
-
-- A helper function push is defined within the scope of process_tree to add a
-child element to the stack.
-
-- A while loop begins which will run as long as there are elements in the
-stack.
-
-- Inside the while loop, the pop method removes the last element from the stack
-and assigns it to the variable current.
-
-- Then there's an if check to see if the 'tag' of the current element is
-'LogName'. If it is, it retrieves the 'text' from its first child's first child
-and assigns it to log_name.
-
-- Another if check follows to see if the 'tag' of the current element is
-'Expression'. If it is, a nested loop iterates over its 'children'. If any
-child has a 'tag' of 'SimpleExpression', the generate_where_clause function is
-called on it to generate a where clause, which is then appended to the
-expressions list.
-
-- After checking and processing 'LogName' and 'Expression' tags, the while loop
-iterates over the 'children' of the current node and uses the push function to
-add each child to the stack. This way, the while loop will process all nodes in
-the tree in a depth-first manner.
-
-- Once the while loop finishes (meaning there are no more elements left in the
-stack), there is a check to see if log_name is not None. If it's not, it
-constructs an XPath expression using log_name and all the expressions collected
-in the expressions list, and prints it.
-
-'''
-
+# Perform depth-first traversal of the XML tree and generate XPath expressions
 def process_tree(tree, file):
     stack = [tree]
     expressions = []
     log_name = None
 
+    # Helper function to add child element to the stack
     def push(child):
         stack.append(child)
 
+    # Generate regex clause from the node in the tree
     def generate_regex_clause(node):
         xpath_query = node['children'][0]['children'][0]['text']
         # Lookup in dictionary
@@ -118,11 +82,14 @@ def process_tree(tree, file):
         clause = " or ".join([f"{xpath_expression}={id}" for id in id_list])
 
         return "(" + clause + ")"
-    
+
+    # Begin traversing the tree
     while stack:
         current = stack.pop()
+        # Get log name
         if current['tag'] == 'LogName':
             log_name = current['children'][0]['children'][0]['text']
+        # Generate expressions
         if current['tag'] == 'Expression':
             for child in current['children']:
                 if child['tag'] == 'SimpleExpression':
@@ -131,9 +98,11 @@ def process_tree(tree, file):
                 elif child['tag'] == 'RegExExpression':
                     regex_clause = generate_regex_clause(child)
                     expressions.append(regex_clause)
+        # Traverse children of current node
         for child in current['children']:
             push(child)
 
+    # Construct XPath expression if log_name is defined
     if log_name is not None:
         expanded = ' and '.join(expressions)
         xpath_expression = log_name + "!*" + "[" + log_name + "[" + expanded + "]]"
@@ -141,8 +110,9 @@ def process_tree(tree, file):
         file.write(xpath_expression + "\r\n")
 
 
+# Generate WHERE clause for the expression
 def generate_where_clause(expression):
-    value_expression_1 = get_dictionary_lookup( expression['children'][0]['children'][0]['text'])
+    value_expression_1 = get_dictionary_lookup(expression['children'][0]['children'][0]['text'])
     operator = get_dictionary_lookup(expression['children'][1]['text'])
     value_expression_2 = get_dictionary_lookup(expression['children'][2]['children'][0]['text'])
 
@@ -152,6 +122,8 @@ def generate_where_clause(expression):
     where_clause = f"({value_expression_1}{operator}{value_expression_2})"
     return where_clause
 
+
+# Return corresponding value from the dictionary. If not found, return the parameter as is
 def get_dictionary_lookup(parameter):
     dictionary = {
         'Equal': '=',
@@ -164,6 +136,8 @@ def get_dictionary_lookup(parameter):
     else:
         return parameter
 
+
+# Check if parameter needs to be enclosed in quotes
 def need_quotes(parameter):
     dictionary = {
         'Provider[@Name': True,
@@ -175,14 +149,25 @@ def need_quotes(parameter):
     else:
         return False
 
+def main():
+    # Open and read XML file
+    with open("./allqueriesxml.xml", "r") as file:
+        content = file.read()
 
-with open("./allqueriesxml.xml", "r") as file:
-    content = file.read()
+    # Output file path
+    file_path = './output.txt'
 
-file_path = './output.txt'
+    # If output file already exists, delete it
+    if os.path.exists(file_path):
+        os.remove(file_path)
 
-if os.path.exists(file_path):
-    os.remove(file_path)
-tree = parse_expression(content)
-with open(file_path, "a") as file:
-    process_trees(tree, file)
+    # Parse XML content and generate dictionary tree
+    tree = parse_expression(content)
+
+    # Write XPath expressions to output file
+    with open(file_path, "a") as file:
+        process_trees(tree, file)
+
+# Call the main function
+if __name__ == "__main__":
+    main()
