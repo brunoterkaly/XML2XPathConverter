@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import re
+import os
 
 def parse_expression(expression):
     root = ET.fromstring(expression)
@@ -41,10 +42,10 @@ def generate_simple_expression(node):
     result.extend(value_expressions)
     return result
 
-def process_trees(root):
+def process_trees(root, file):
     for workload in root['children']:
         if workload['tag'] == 'Workload':
-            process_tree(workload)
+            process_tree(workload, file)
 
 '''
 --------------------------
@@ -96,7 +97,7 @@ in the expressions list, and prints it.
 
 '''
 
-def process_tree(tree):
+def process_tree(tree, file):
     stack = [tree]
     expressions = []
     log_name = None
@@ -136,6 +137,7 @@ def process_tree(tree):
     if log_name is not None:
         xpath_expression = f"{log_name}!*[{log_name}[{ ' and '.join(expressions) }]]"
         print(xpath_expression)
+        file.write(xpath_expression + "\n")
 
 
 def generate_where_clause(expression):
@@ -173,105 +175,13 @@ def need_quotes(parameter):
         return False
 
 
-expression = '''
-<Workload>
-    <LogName>
-        <ValueExpression>
-            <Value Type="String">Application</Value>
-        </ValueExpression>
-    </LogName>
-    <Expression>
-        <SimpleExpression>
-            <ValueExpression>
-                <XPathQuery Type="String">PublisherName</XPathQuery>
-            </ValueExpression>
-            <Operator>Equal</Operator>
-            <ValueExpression>
-                <Value Type="String">Microsoft-Windows-IIS-W3SVC-WP</Value>
-            </ValueExpression>
-        </SimpleExpression>
-    </Expression>
-    <Expression>
-        <SimpleExpression>
-            <ValueExpression>
-                <XPathQuery>EventDisplayNumber</XPathQuery>
-            </ValueExpression>
-            <Operator>Equal</Operator>
-            <ValueExpression>
-                <Value>2216</Value>
-            </ValueExpression>
-        </SimpleExpression>
-    </Expression>
-</Workload>
-'''
-
-expression2 = '''
-<Workload>
-    <LogName>
-        <ValueExpression>
-            <Value Type="String">System</Value>
-        </ValueExpression>
-    </LogName>
-	<Expression>
-		<SimpleExpression>
-			<ValueExpression>
-				<XPathQuery>EventDisplayNumber</XPathQuery>
-			</ValueExpression>
-			<Operator>Equal</Operator>
-			<ValueExpression>
-				<Value>5152</Value>
-			</ValueExpression>
-		</SimpleExpression>
-	</Expression>
-	<Expression>
-		<SimpleExpression>
-			<ValueExpression>
-				<XPathQuery Type="String">PublisherName</XPathQuery>
-			</ValueExpression>
-			<Operator>Equal</Operator>
-			<ValueExpression>
-				<Value Type="String">Microsoft-Windows-WAS</Value>
-			</ValueExpression>
-		</SimpleExpression>
-	</Expression>
-</Workload>
-'''
-
-expression3 = '''
-<Workload>
-    <LogName>
-        <ValueExpression>
-            <Value Type="String">System</Value>
-        </ValueExpression>
-    </LogName>
-	<Expression>
-		<RegExExpression>
-			<ValueExpression>
-				<XPathQuery>EventDisplayNumber</XPathQuery>
-			</ValueExpression>
-			<Operator>MatchesRegularExpression</Operator>
-			<Pattern>^(5010|5011|5012|5013)$</Pattern>
-		</RegExExpression>
-	</Expression>
-	<Expression>
-		<SimpleExpression>
-			<ValueExpression>
-				<XPathQuery Type="String">PublisherName</XPathQuery>
-			</ValueExpression>
-			<Operator>Equal</Operator>
-			<ValueExpression>
-				<Value Type="String">Microsoft-Windows-WAS</Value>
-			</ValueExpression>
-		</SimpleExpression>
-	</Expression>
-</Workload>
-'''
-
-'''
-System!*[System[(Provider[@Name=\'Microsoft-Windows-WAS\') and (EventID=5010 or EventID=5011 or EventID=5012 or EventID=5013)]]
-'''
 with open("./allqueriesxml.xml", "r") as file:
     content = file.read()
 
+file_path = './output.txt'
+
+if os.path.exists(file_path):
+    os.remove(file_path)
 tree = parse_expression(content)
-process_trees(tree)
+with open(file_path, "a") as file:
+    process_trees(tree, file)
