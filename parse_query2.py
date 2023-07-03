@@ -135,9 +135,10 @@ def process_tree(tree, file):
             push(child)
 
     if log_name is not None:
-        xpath_expression = f"{log_name}!*[{log_name}[{ ' and '.join(expressions) }]]"
+        expanded = ' and '.join(expressions)
+        xpath_expression = log_name + "!*" + "[" + log_name + "[" + expanded + "]]"
         print(xpath_expression)
-        file.write(xpath_expression + "\n")
+        file.write(xpath_expression + "\r\n")
 
 
 def generate_where_clause(expression):
@@ -146,7 +147,7 @@ def generate_where_clause(expression):
     value_expression_2 = get_dictionary_lookup(expression['children'][2]['children'][0]['text'])
 
     if need_quotes(value_expression_1):
-        value_expression_2 = fr"\'{value_expression_2}\'"
+        value_expression_2 = fr"\'{value_expression_2}]\'"
 
     where_clause = f"({value_expression_1}{operator}{value_expression_2})"
     return where_clause
