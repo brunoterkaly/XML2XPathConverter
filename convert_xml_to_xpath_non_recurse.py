@@ -57,7 +57,13 @@ def generate_value_expression(node):
     return value
 
 
-# Generate simple expression using the operator and the values
+
+# Traverse the XML tree and process each 'Workload' tag
+def process_trees(root, file):
+    for workload in root['children']:
+        if workload['tag'] == 'Workload':
+            process_tree(workload, file)
+
 def generate_simple_expression(node):
     value_expressions = []
     operator = ""
@@ -66,23 +72,18 @@ def generate_simple_expression(node):
         if child['tag'] == 'ValueExpression':
             value_expressions.append(generate_value_expression(child))
         elif child['tag'] == 'Operator':
-            # Check if 'text' attribute exists before accessing it
             operator = child.get('text', "")
             operator = get_dictionary_lookup(operator)
 
     result = [operator]
     result.extend(value_expressions)
-    return result
+    return ' '.join(result)
 
 
-# Traverse the XML tree and process each 'Workload' tag
-def process_trees(root, file):
-    for workload in root['children']:
-        if workload['tag'] == 'Workload':
-            process_tree(workload, file)
+def generate_where_clause(node):
+    return ' '.join(generate_simple_expression(node))
 
 
-# Perform depth-first traversal of the XML tree and generate XPath expressions
 def process_tree(tree, file):
     stack = [tree]
     expressions = []
@@ -92,36 +93,31 @@ def process_tree(tree, file):
     def push(child):
         stack.append(child)
 
-    # Generate regex clause from the node in the tree
-    def generate_regex_clause(node):
-        xpath_query = node['children'][0]['children'][0]['text']
-        # Lookup in dictionary
-        xpath_expression = get_dictionary_lookup(xpath_query)
-        pattern = node['children'][2]['text']
-
-        # Extract the IDs from the pattern using a regular expression
-        id_list = re.findall(r'\b\d+\b', pattern)
-
-        # Generate the clause
-        clause = " or ".join([f"{xpath_expression}={id}" for id in id_list])
-
-        return "(" + clause + ")"
-
     # Begin traversing the tree
     while stack:
         current = stack.pop()
+        #----------------------------------------------
+        # We only care about LogName and Expression at top level
+        #----------------------------------------------
         # Get log name
         if current['tag'] == 'LogName':
-            log_name = current['children'][0]['children'][0]['text']
-        # Generate expressions
-        if current['tag'] == 'Expression':
+            log_name = generate_value_expression(current['children'][0])
+        
+        # We found Expression, so loop through children
+        
+        elif current['tag'] == 'Expression':
             for child in current['children']:
                 if child['tag'] == 'SimpleExpression':
                     where_clause = generate_where_clause(child)
                     expressions.append(where_clause)
-                elif child['tag'] == 'RegExExpression':
-                    regex_clause = generate_regex_clause(child)
-                    expressions.append(regex_clause)
+                elif child['tag'] == 'Or':
+                    # If we encounter an Or tag, we join the expressions by 'or' instead of 'and'
+                    or_expressions = []
+                    for nested_child in child['children']:
+                        or_clause = generate_where_clause(nested_child)
+                        or_expressions.append(or_clause)
+                    expressions.append("(" + " or ".join(or_expressions) + ")")
+
         # Traverse children of current node
         for child in current['children']:
             push(child)
@@ -129,22 +125,10 @@ def process_tree(tree, file):
     # Construct XPath expression if log_name is defined
     if log_name is not None:
         expanded = ' and '.join(expressions)
-        xpath_expression = log_name + "!*" + "[" + log_name + "[" + expanded + "]]"
+        xpath_expression = f"{log_name}!*[{log_name}[{expanded}]]"
         print(xpath_expression)
         file.write(xpath_expression + "\r\n")
 
-
-# Generate WHERE clause for the expression
-def generate_where_clause(expression):
-    value_expression_1 = get_dictionary_lookup(expression['children'][0]['children'][0]['text'])
-    operator = get_dictionary_lookup(expression['children'][1]['text'])
-    value_expression_2 = get_dictionary_lookup(expression['children'][2]['children'][0]['text'])
-
-    if need_quotes(value_expression_1):
-        value_expression_2 = fr"\'{value_expression_2}]\'"
-
-    where_clause = f"({value_expression_1}{operator}{value_expression_2})"
-    return where_clause
 
 
 # Return corresponding value from the dictionary. If not found, return the parameter as is
@@ -175,11 +159,11 @@ def need_quotes(parameter):
 
 def main():
     # Open and read XML file
-    with open("./allqueriesxml.xml", "r") as file:
+    with open("./allqueriesxml_complex.xml", "r") as file:
         content = file.read()
 
     # Output file path
-    file_path = './output.txt'
+    file_path = './output2.txt'
 
     # If output file already exists, delete it
     if os.path.exists(file_path):

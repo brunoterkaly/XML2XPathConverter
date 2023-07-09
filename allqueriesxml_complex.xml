@@ -1,0 +1,35 @@
+<Queries>
+	<Workload>
+		<LogName>
+			<ValueExpression>
+				<Value Type="String">Application</Value>
+			</ValueExpression>
+		</LogName>
+		<Expression>
+			<Or>
+				<Expression>
+					<SimpleExpression>
+						<ValueExpression>
+							<XPathQuery Type="Boolean">Values/ServerRegKeyExists</XPathQuery>
+						</ValueExpression>
+						<Operator>Equal</Operator>
+						<ValueExpression>
+							<Value Type="Boolean">true</Value>
+						</ValueExpression>
+					</SimpleExpression>
+				</Expression>
+				<Expression>
+					<SimpleExpression>
+						<ValueExpression>
+							<XPathQuery Type="Boolean">Values/WebConsoleRegKeyExists</XPathQuery>
+						</ValueExpression>
+						<Operator>Equal</Operator>
+						<ValueExpression>
+							<Value Type="Boolean">true</Value>
+						</ValueExpression>
+					</SimpleExpression>
+				</Expression>
+			</Or>
+		</Expression>
+	</Workload>
+</Queries>
