@@ -6,30 +6,43 @@
 			</ValueExpression>
 		</LogName>
 		<Expression>
-			<Or>
+			<And>
+				<Or>
+					<Expression>
+						<SimpleExpression>
+							<ValueExpression>
+								<XPathQuery Type="Boolean">color</XPathQuery>
+							</ValueExpression>
+							<Operator>Equal</Operator>
+							<ValueExpression>
+								<Value Type="Boolean">blue</Value>
+							</ValueExpression>
+						</SimpleExpression>
+					</Expression>
+					<Expression>
+						<SimpleExpression>
+							<ValueExpression>
+								<XPathQuery Type="Boolean">size</XPathQuery>
+							</ValueExpression>
+							<Operator>Equal</Operator>
+							<ValueExpression>
+								<Value Type="Boolean">large</Value>
+							</ValueExpression>
+						</SimpleExpression>
+					</Expression>
+				</Or>
 				<Expression>
 					<SimpleExpression>
 						<ValueExpression>
-							<XPathQuery Type="Boolean">Values/ServerRegKeyExists</XPathQuery>
+							<XPathQuery Type="Boolean">weight</XPathQuery>
 						</ValueExpression>
 						<Operator>Equal</Operator>
 						<ValueExpression>
-							<Value Type="Boolean">true</Value>
+							<Value Type="Boolean">100</Value>
 						</ValueExpression>
 					</SimpleExpression>
 				</Expression>
-				<Expression>
-					<SimpleExpression>
-						<ValueExpression>
-							<XPathQuery Type="Boolean">Values/WebConsoleRegKeyExists</XPathQuery>
-						</ValueExpression>
-						<Operator>Equal</Operator>
-						<ValueExpression>
-							<Value Type="Boolean">true</Value>
-						</ValueExpression>
-					</SimpleExpression>
-				</Expression>
-			</Or>
+			</And>
 		</Expression>
 	</Workload>
 </Queries>

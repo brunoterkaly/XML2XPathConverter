@@ -9,6 +9,11 @@ def parse_expression(expression):
     root = ET.fromstring(expression)
     return parse_node(root)
 
+def print_stack(stack):
+    indent = 0
+    for item in stack:
+        print(f'{" " * indent}{item}')
+        indent += 2
 
 # Recursively traverse XML node tree and build a dictionary
 def parse_node(root):
@@ -64,6 +69,16 @@ def process_trees(root, file):
         if workload['tag'] == 'Workload':
             process_tree(workload, file)
 
+
+def generate_value_expression(node):
+    value = ""
+    for child in node['children']:
+        # Concatenate Type and text if the tag is either 'XPathQuery' or 'Value'
+        if child['tag'] == 'XPathQuery' or child['tag'] == 'Value':
+            value += child.get('text', "")
+            #value += child['attrib'].get('Type', "") + child.get('text', "")
+    return value
+
 def generate_simple_expression(node):
     value_expressions = []
     operator = ""
@@ -73,16 +88,18 @@ def generate_simple_expression(node):
             value_expressions.append(generate_value_expression(child))
         elif child['tag'] == 'Operator':
             operator = child.get('text', "")
-            operator = get_dictionary_lookup(operator)
 
-    result = [operator]
-    result.extend(value_expressions)
-    return ' '.join(result)
+    if len(value_expressions) >= 2:
+        result = [value_expressions[0], operator, value_expressions[1]]
+        return ' '.join(result)
+    else:
+        # Handle the case when there are not enough value expressions.
+        # You could return an error message, a default value, or whatever makes sense in your context.
+        return "Not enough value expressions."
 
 
 def generate_where_clause(node):
-    return ' '.join(generate_simple_expression(node))
-
+    return generate_simple_expression(node['children'][0])
 
 def process_tree(tree, file):
     stack = [tree]
@@ -104,12 +121,11 @@ def process_tree(tree, file):
             log_name = generate_value_expression(current['children'][0])
         
         # We found Expression, so loop through children
-        
         elif current['tag'] == 'Expression':
             for child in current['children']:
                 if child['tag'] == 'SimpleExpression':
-                    where_clause = generate_where_clause(child)
-                    expressions.append(where_clause)
+                    if len(child['children']) > 0:
+                        pass
                 elif child['tag'] == 'Or':
                     # If we encounter an Or tag, we join the expressions by 'or' instead of 'and'
                     or_expressions = []
