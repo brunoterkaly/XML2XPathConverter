@@ -78,5 +78,41 @@ if __name__ == "__main__":
         </And>
     </xml>
     """
-    where_clause = simplify_xml(xml_string)
+    xml_string2 = """
+    <xml>
+        <Or>
+            <Expression>
+                <SimpleExpression>
+                    <ValueExpression>
+                        <XPathQuery>color</XPathQuery>
+                        <Operator>Equal</Operator>
+                        <Value>blue</Value>
+                    </ValueExpression>
+                </SimpleExpression>
+            </Expression>
+            <And>
+                <Expression>
+                    <SimpleExpression>
+                        <ValueExpression>
+                            <XPathQuery>color</XPathQuery>
+                            <Operator>Equal</Operator>
+                            <Value>blue</Value>
+                        </ValueExpression>
+                    </SimpleExpression>
+                </Expression>
+                <Expression>
+                    <SimpleExpression>
+                        <ValueExpression>
+                            <XPathQuery>color</XPathQuery>
+                            <Operator>Equal</Operator>
+                            <Value>Green</Value>
+                        </ValueExpression>
+                    </SimpleExpression>
+                </Expression>
+            </And>
+        </Or>
+    </xml>
+
+    """
+    where_clause = simplify_xml(xml_string2)
     print(where_clause) # Output: color Equal 'blue' OR color Equal 'Green'
