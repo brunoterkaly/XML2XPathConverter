@@ -131,7 +131,7 @@ def generate_output(result):
     def parse_expression(expression):
         if 'And' in expression:
             and_expr = expression['And']
-            return ' and '.join([parse_expression(expr) for expr in and_expr])
+            return '(' + ' and '.join([parse_expression(expr) for expr in and_expr]) + ')'
         elif 'Or' in expression:
             or_expr = expression['Or']
             return '(' + ' or '.join([parse_expression(expr) for expr in or_expr]) + ')'
@@ -148,6 +148,7 @@ def generate_output(result):
     expression = workload['Expression']
     output = f"where {parse_expression(expression)}"
     return output
+
 
 
 parser = Parser(xml_input)
